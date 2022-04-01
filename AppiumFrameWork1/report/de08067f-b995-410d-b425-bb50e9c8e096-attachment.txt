@@ -1,0 +1,2 @@
+[Deprecated] Please use 'find_element' with 'AppiumBy.ANDROID_UIAUTOMATOR' instead.
+[Deprecated] Please use 'find_element' with 'AppiumBy.ANDROID_UIAUTOMATOR' instead.

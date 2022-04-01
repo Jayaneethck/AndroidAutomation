@@ -1,0 +1,7 @@
+[32mINFO    [0m BasePage:BasePage.py:72 Click on Element found with LocatorType:idwith the locator value :com.dukaan.app:id/get_started
+[32mINFO    [0m BasePage:BasePage.py:72 Click on Element found with LocatorType:idwith the locator value :com.dukaan.app:id/btn_email
+[32mINFO    [0m BasePage:BasePage.py:84 Click on Element found with LocatorType:idwith the locator value :com.dukaan.app:id/et_input
+[32mINFO    [0m BasePage:BasePage.py:72 Click on Element found with LocatorType:idwith the locator value :com.dukaan.app:id/btn_continue
+[32mINFO    [0m BasePage:BasePage.py:84 Click on Element found with LocatorType:idwith the locator value :com.dukaan.app:id/et_password
+[32mINFO    [0m BasePage:BasePage.py:72 Click on Element found with LocatorType:idwith the locator value :com.dukaan.app:id/btn_continue
+[32mINFO    [0m BasePage:BasePage.py:75 Unable to Click on Element not found with LocatorType:idwith the locator value :com.dukaan.app:id/home
