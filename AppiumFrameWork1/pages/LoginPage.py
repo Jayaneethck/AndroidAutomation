@@ -1,7 +1,5 @@
 from itertools import product
 
-from appium.webdriver import webdriver
-
 from AppiumFrameWork.main.BasePage import BasePage
 import AppiumFrameWork.utilities.CustomLogger as cl
 
@@ -11,9 +9,6 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-
-
-
 
     # locator for loginpage
 
@@ -35,13 +30,13 @@ class LoginPage(BasePage):
         return
 
     def enterEmailAddress(self):
-        self.sendText("menavaf153@azteen.com", self._enteremailadddress, "id")
+        self.sendText("cojeret739@kuruapp.com", self._enteremailadddress, "id")
 
     def clickEmailContinueButton(self):
         self.clickElement(self._continueemailbutton, "id")
 
     def enterPassword(self):
-        self.sendText("menavaf153@azteen.com", self._enterpassword, "id")
+        self.sendText("dukaanauto", self._enterpassword, "id")
 
     # def enterPassword2(self):
     # self.sendText("Clinton@971", self._enterpassword, "id")
@@ -66,4 +61,3 @@ class LoginPage(BasePage):
         self.enterPassword()
         self.clickPasswordContinueButton()
         self.verifyHomePage()
-

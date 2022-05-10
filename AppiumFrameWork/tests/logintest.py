@@ -6,7 +6,7 @@ import random
 
 from AppiumFrameWork.pages.LoginPage import LoginPage
 import AppiumFrameWork.utilities.CustomLogger as cl
-from AppiumFrameWork.pages.AccountPage import AccountPage
+from AppiumFrameWork.pages.AccountPage import orderPage
 
 product_names = ['Sauce', 'Sausage', 'Fire Extinguisher', 'Bagpack', 'Powder', 'Umbrella', 'Iphone', 'Charger']
 category_names = ['Electronics', 'Household', 'Mobile Accessories', 'Food Items', 'Healthcare', 'Medical',
@@ -20,12 +20,18 @@ class LoginCall(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def classObject(self):
         self.cf = LoginPage(self.driver)
-        self.ap = AccountPage(self.driver)
+        self.op = orderPage(self.driver)
 
     def test_add_products(self):
         random_name = (random.choice(product_names))
-        #cl.allureLogs("App Launch")
-        self.cf.logincall()
+        cl.allureLogs("App Launch")
+        self.cf.getStartMethod()
+        self.cf.clickEmailButton()
+        self.cf.enterEmailAddress()
+        self.cf.clickEmailContinueButton()
+        self.cf.enterPassword()
+        self.cf.clickPasswordContinueButton()
+        self.cf.verifyHomePage()
         products_icon = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Products")')
         products_icon.click()
@@ -72,7 +78,13 @@ class LoginCall(unittest.TestCase):
 
     def test_add_new_category(self):
         random_category_name = (random.choice(category_names))
-
+        self.cf.getStartMethod()
+        self.cf.clickEmailButton()
+        self.cf.enterEmailAddress()
+        self.cf.clickEmailContinueButton()
+        self.cf.enterPassword()
+        self.cf.clickPasswordContinueButton()
+        self.cf.verifyHomePage()
         products_icon = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Products")')
         products_icon.click()

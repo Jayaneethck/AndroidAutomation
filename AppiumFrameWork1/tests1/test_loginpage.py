@@ -40,13 +40,13 @@ class LoginPage(unittest.TestCase):
         continue_with_email_button.click()
         sleep(1)
         email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
-        email_address_textbox.send_keys("clintonvinoth97@gmail.com")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
         sleep(1)
         continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
         continue_button.click()
         sleep(2)
         password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
-        password_textbox.send_keys("Clinton@97")
+        password_textbox.send_keys("dukaanauto")
         sleep(1)
         show_password = self.driver.find_element_by_id("com.dukaan.app:id/tv_hide_show")
         show_password.click()
@@ -70,7 +70,8 @@ class LoginPage(unittest.TestCase):
         sleep(2)
         otp_textbox = self.driver.find_element_by_id("1d13d877-636d-4ec0-9663-7ce3512c4b87")
         # otp_textbox = self.driver.find_element_by_android_uiautomator(
-        #     'new UiSelector().className("android.widget.TextView").text(" ")')l
+        #     'new UiSelector().className("android.widget.TextView").text(" ")')
+        otp_textbox.send_keys("723573")
         sleep(5)
         assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Home")')
 

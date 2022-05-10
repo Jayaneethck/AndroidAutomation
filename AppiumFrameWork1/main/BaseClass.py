@@ -113,5 +113,6 @@ class BasePage:
     def keyCodes(self, value):
         self.driver.press_keycode(value)
 
-    # def asserts(self, text):
-    # self.driver.is_displayed(text)
+    #def asserts(self, text):
+        #self.driver.is_displayed(text)
+

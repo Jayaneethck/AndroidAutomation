@@ -7,7 +7,7 @@ from time import sleep
 from attr import field
 
 from AppiumFrameWork1.pages.LoginPage import LoginPage
-
+from AppiumFrameWork1.pages.OrderPage import orderPage
 
 import random
 
@@ -17,12 +17,12 @@ delivery_fee = ['40', '30', '50', '60', '70', '80', '90', '100']
 class OrdersPage(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Remote(command_executor="http://127.0.0.1:4725/wd/hub",
+        self.driver = webdriver.Remote(command_executor="http://127.0.0.1:4723/wd/hub",
                                        desired_capabilities=
                                        {
                                            "platformName": "Android",
-                                           "platformVersion": "11",
-                                           "deviceName": "138276037200179",
+                                           "platformVersion": "9",
+                                           "deviceName": "emulator-5554",
                                            "automationName": "uiautomator2",
                                            "app": "C:/Users/clinton/Downloads/app-prod-debug.apk",
                                            "newCommandTimeout": 600,
@@ -32,16 +32,35 @@ class OrdersPage(unittest.TestCase):
                                        })
 
     def test_order_details_page(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
         orders_icon = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Orders")')
         orders_icon.click()
         sleep(2)
         details_button = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Details")')
         details_button.click()
-        sleep(3)
-        assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Grand Total")')
+        sleep(2)
+        assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Home")')
 
     # def test_accept_order(self):
     #     self.driver.launch_app()
@@ -334,8 +353,27 @@ class OrdersPage(unittest.TestCase):
 
     def test_edit_delivery_fee(self):
         random_fee_amount = (random.choice(delivery_fee))
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
         orders_icon = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Orders")')
         orders_icon.click()
@@ -364,8 +402,27 @@ class OrdersPage(unittest.TestCase):
         assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Modified")')
 
     def test_orders_page_range_filters(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
         orders_icon = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Orders")')
         orders_icon.click()
@@ -427,7 +484,7 @@ class OrdersPage(unittest.TestCase):
         apply_button.click()
         sleep(3)
         assert self.driver.find_element_by_android_uiautomator(
-            'new UiSelector().className("android.widget.TextView").text("01/03/22 - 28/03/22")')
+            'new UiSelector().className("android.widget.TextView").text("01/02/22 - 28/02/22")')
 
     def test_order_id_matching(self):
         self.driver.launch_app()
@@ -664,8 +721,27 @@ class OrdersPage(unittest.TestCase):
            # 'new UiSelector().className("android.widget.TextView").text("No orders found.")')
 
     def test_order_an_item_from_buyer_side(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
         store_link = self.driver.find_element_by_id("com.dukaan.app:id/store_link_tv")
         store_link.click()
         sleep(5)
@@ -694,7 +770,6 @@ class OrdersPage(unittest.TestCase):
             '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.app.Dialog/android.view.View/android.view.View[2]/android.view.View/android.view.View[2]/android.widget.EditText')
         mobile_number_textbox.send_keys("")
         sleep(1)
-
         mobile_number_textbox.send_keys("8047187134")
         send_otp_button = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.Button").text("Send OTP")')

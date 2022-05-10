@@ -30,7 +30,7 @@ class LoginPage(BasePage):
         cl.allureLogs("click on emailButton")
 
     def enterEmailAddress(self):
-        self.sendText("clintonyesudass1999@gmail.com", self._enteremailadddress, "id")
+        self.sendText("clintonvinoth97@gmail.com", self._enteremailadddress, "id")
         cl.allureLogs("Entered EmailAddress")
 
     def clickEmailContinueButton(self):
@@ -55,14 +55,4 @@ class LoginPage(BasePage):
 
     def order(self):
         self.clickElement(self._orderPage, "id")
-
-    def logincall(self):
-        self.getStartMethod()
-        self.clickEmailButton()
-        self.enterEmailAddress()
-        self.clickEmailContinueButton()
-        self.enterPassword()
-        self.clickPasswordContinueButton()
-        self.verifyHomePage()
-
 

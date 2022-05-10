@@ -1,23 +1,15 @@
 import unittest
-from lib2to3.pgen2 import driver
-from telnetlib import EC
 
 from appium import webdriver
-from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
-from selenium.webdriver.support import expected_conditions as EC
 import unittest
 from appium import webdriver
-from selenium import webdriver
 import pytest
 from time import sleep
 
 import random
 
-from selenium.webdriver.support.wait import WebDriverWait
-
 from AppiumFrameWork1.tests.test_homepage import logger
-from AppiumFrameWork1.pages.LoginPage import LoginPage
 
 name = ['Delta', 'Alpha', 'Hari', 'Rijaz', 'KJ', 'Abhilash', 'Platina', 'KTM', 'Cars', 'Bikes', 'Soul', 'Spark']
 
@@ -39,37 +31,79 @@ class HomePage(unittest.TestCase):
                                        })
 
     def test_navigation_in_home_page(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        products_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '//android.widget.FrameLayout[@content-desc="Products"]/android.widget.ImageView')))
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        products_icon = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Products")')
         products_icon.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().className("android.widget.TextView").text("Catalogue")')))
-        manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().className("android.widget.TextView").text("Manage")')))
+        sleep(3)
+
+        assert self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Catalogue")')
+        manage_icon = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Manage")')
         manage_icon.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().className("android.widget.TextView").text("Manage Store")')))
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().className("android.widget.TextView").text("Account")')))
+        sleep(3)
+        assert self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Manage Store")')
+        accounts_icon = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Account")')
         accounts_icon.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().className("android.widget.TextView").text("Account")')))
-        orders_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().className("android.widget.TextView").text("Orders")')))
+        sleep(3)
+        assert self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Account")')
+        orders_icon = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Orders")')
         orders_icon.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Orders")')))
+        sleep(3)
+        assert self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Orders")')
 
     def test_total_sales_navigating_to_delivered_orders(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-       # self.cf = LoginPage(self.driver)
-       # self.cf.logincall()
-       # manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
-       # manage_icon.click()
-       # dukaan_plugin = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[5]/android.widget.FrameLayout/android.widget.LinearLayout")))
-       # dukaan_plugin.click()
-       # privy_ecommerce_marketing = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/pluginTitleTV")))
-       # privy_ecommerce_marketing.click
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
         sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
         self.driver.swipe(500, 1550, 500, 250, 500)
-        sleep(3)
-        total_sales_text = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("TOTAL SALES")')))
+        total_sales_text = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("TOTAL SALES")')
         total_sales_text.click()
+        sleep(3)
         try:
             assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Delivered orders")')
         except Exception as e:
@@ -77,8 +111,27 @@ class HomePage(unittest.TestCase):
         logger.info(" Successfully navigating to Delivered order by clicking total sales(Passed)")
 
     def test_store_views(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
         store_views_text = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("STORE VIEWS")')
         store_views_text.click()
         sleep(1)
@@ -91,8 +144,27 @@ class HomePage(unittest.TestCase):
 
     def test_dukaan_status(self):
         # make sure your store is online before performing this test
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
         dukaan_status_toggle = self.driver.find_element_by_id("com.dukaan.app:id/switchDukaanStatus")
         dukaan_status_toggle.click()
         sleep(1)
@@ -156,8 +228,27 @@ class HomePage(unittest.TestCase):
     #     logger.info("Domain Selection working successfully(Passed)")
 
     def test_share_link(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
         whatsapp_share_icon = self.driver.find_element_by_id("com.dukaan.app:id/share_whatsapp_iv")
         whatsapp_share_icon.click()
         sleep(3)
@@ -171,10 +262,28 @@ class HomePage(unittest.TestCase):
         sleep(1)
 
     def test_home_overview_filters(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        self.driver.swipe(900, 1284, 900, 950, 500)
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
         sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        self.driver.swipe(900, 1284, 900, 950, 500)
         filter_dropdown = self.driver.find_element_by_id("com.dukaan.app:id/overvieoverview_w_filter_tv")
         filter_dropdown.click()
         sleep(1)
@@ -190,30 +299,27 @@ class HomePage(unittest.TestCase):
         filter_yesterday = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Yesterday")')
         filter_yesterday.click()
-        sleep(3)
+        sleep(1)
         assert self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Yesterday")')
         filter_dropdown = self.driver.find_element_by_id("com.dukaan.app:id/overvieoverview_w_filter_tv")
         filter_dropdown.click()
-        sleep(3)
         filter_this_week = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("This Week")')
         filter_this_week.click()
-        sleep(5)
+        sleep(1)
         assert self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("This Week")')
         filter_dropdown = self.driver.find_element_by_id("com.dukaan.app:id/overvieoverview_w_filter_tv")
         filter_dropdown.click()
-        sleep(3)
         filter_last_week = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Last Week")')
         filter_last_week.click()
-        sleep(2)
+        sleep(1)
         assert self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Last Week")')
         filter_dropdown = self.driver.find_element_by_id("com.dukaan.app:id/overvieoverview_w_filter_tv")
         filter_dropdown.click()
-        sleep(2)
         filter_this_month = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("This Month")')
         filter_this_month.click()
@@ -259,15 +365,34 @@ class HomePage(unittest.TestCase):
         end_date.click()
         apply_button = self.driver.find_element_by_id("com.dukaan.app:id/tvBtnApplyCalendarFilter")
         apply_button.click()
-        sleep(3)
+        sleep(1)
         assert self.driver.find_element_by_android_uiautomator(
-            'new UiSelector().className("android.widget.TextView").text("01/03/22 - 28/03/22")')
+            'new UiSelector().className("android.widget.TextView").text("01/02/22 - 28/02/22")')
 
     def test_dukaan_banners(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        banner_dukaan_marketing = self.driver.find_element_by_id("com.dukaan.app:id/promotionalBannerRV")
-
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        banner_dukaan_marketing = self.driver.find_element_by_xpath(
+            '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.view.ViewGroup[2]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.ImageView')
         banner_dukaan_marketing.click()
         sleep(1)
         assert self.driver.find_element_by_android_uiautomator(
@@ -299,12 +424,31 @@ class HomePage(unittest.TestCase):
             'new UiSelector().className("android.widget.TextView").text("Dukaan Credits")')
 
     def test_add_shortcuts(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        self.driver.swipe(533, 1633, 550, 982, 500)
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
         sleep(3)
-        # trial_close_button = self.driver.find_element_by_id("com.dukaan.app:id/closeIV")
-        # trial_close_button.click()
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        self.driver.swipe(500, 1660, 500, 300, 500)
+        sleep(1)
+        trial_close_button = self.driver.find_element_by_id("com.dukaan.app:id/closeIV")
+        trial_close_button.click()
         add_shortcut_button = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Add shortcut")')
         add_shortcut_button.click()
@@ -316,13 +460,31 @@ class HomePage(unittest.TestCase):
         assert self.driver.find_element_by_xpath('(//android.widget.ImageView[@content-desc="Small Icon"])[1]')
 
     def test_delete_shortcut(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        self.driver.swipe(533, 1633, 550, 982, 500)
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
         sleep(3)
-        # trial_close_button = self.driver.find_element_by_id("com.dukaan.app:id/closeIV")
-        # trial_close_button.click()
-        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        self.driver.swipe(500, 1660, 500, 300, 500)
+        sleep(1)
+        trial_close_button = self.driver.find_element_by_id("com.dukaan.app:id/closeIV")
+        trial_close_button.click()
         add_shortcut_button = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Add shortcut")')
         add_shortcut_button.click()
@@ -346,12 +508,31 @@ class HomePage(unittest.TestCase):
             logger.info("Shortcut deleted successfully" + str(e))
 
     def test_add_discount_coupon_from_shortcut(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        self.driver.swipe(533, 1633, 550, 982, 500)
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
         sleep(3)
-        # trial_close_button = self.driver.find_element_by_id("com.dukaan.app:id/closeIV")
-        # trial_close_button.click()
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        self.driver.swipe(500, 1660, 500, 300, 500)
+        sleep(1)
+        trial_close_button = self.driver.find_element_by_id("com.dukaan.app:id/closeIV")
+        trial_close_button.click()
         add_shortcut_button = self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("Add shortcut")')
         add_shortcut_button.click()
@@ -384,24 +565,42 @@ class HomePage(unittest.TestCase):
         minimum_order_value_textbox.send_keys("100")
         create_coupon_buttonb = self.driver.find_element_by_id("com.dukaan.app:id/createCouponButton")
         create_coupon_buttonb.click()
-        sleep(4)
+        sleep(2)
         assert self.driver.find_element_by_android_uiautomator(
             'new UiSelector().className("android.widget.TextView").text("SHORTCUT")')
 
     def test_store_link_redirects_to_buyer_side(self):
         business_name_text = random.choice(name)
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        sleep(5)
-        accounts_icon = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
-                                                 'new UiSelector().className("android.widget.TextView").text("Account")')
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(3)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(4)
+        accounts_icon = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Account")')
         accounts_icon.click()
         sleep(3)
         business_details_button = self.driver.find_element_by_id("com.dukaan.app:id/businessDetailsTV")
         business_details_button.click()
         sleep(2)
         business_name_textbox = self.driver.find_element_by_id("com.dukaan.app:id/store_name_et")
-        business_name_textbox.send_keys("dukaan")
+        business_name_textbox.send_keys(business_name_text)
         sleep(1)
         save_button = self.driver.find_element_by_id("com.dukaan.app:id/action_btn")
         save_button.click()
@@ -412,11 +611,9 @@ class HomePage(unittest.TestCase):
         sleep(1)
         store_link = self.driver.find_element_by_id("com.dukaan.app:id/store_link_tv")
         store_link.click()
-        sleep(20)
-        name_in_buyer_side = self.driver.find_element_by_android_uiautomator(
-            'new UiSelector().className("android.view.View").text("dukaan")')
-        # name_in_buyer_side = self.driver.find_element_by_xpath(
-        # '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.widget.TextView')
+        sleep(3)
+        name_in_buyer_side = self.driver.find_element_by_xpath(
+            '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.widget.TextView')
         sleep(1)
         self.assertEqual(business_name_text, name_in_buyer_side.text)
 

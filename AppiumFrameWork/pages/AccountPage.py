@@ -1,13 +1,8 @@
-from telnetlib import EC
-
-from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support.wait import WebDriverWait
-
 from AppiumFrameWork.main.BasePage import BasePage
 from AppiumFrameWork.main.DriverClass import Driver
-from selenium.webdriver.support import expected_conditions as EC
 
-class AccountPage(BasePage):
+
+class orderPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -38,30 +33,5 @@ class AccountPage(BasePage):
 
     def clickGalleryIcon(self):
         self.clickElement("android.widget.ImageView", "class")
-
-    def editbusinessdetail(self):
-        self.clickAccounticonButton()
-        self.clickBusinessDetails()
-        self.enterBusinessName()
-        self.clickSaveButton()
-        assert self.driver.find_element_by_android_uiautomator(
-            'new UiSelector().className("android.widget.TextView").text("dukaan")')
-
-    def updatestorelogo(self):
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
-        accounts_icon.click()
-        edit_business_details_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Varun")')))
-        edit_business_details_button.click()
-        update_logo_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/tvSelectImage")))
-        update_logo_button.click()
-        gallery_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Gallery")')))
-        gallery_icon.click()
-        folder_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, "	//android.widget.ImageView[@content-desc='Folder']")))
-        folder_select.click()
-        image_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/image_view")))
-        image_select.click()
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/email_et")))
-        save_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store details updated")')))
 
 

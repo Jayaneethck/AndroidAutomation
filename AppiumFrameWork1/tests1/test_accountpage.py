@@ -1,157 +1,303 @@
 import unittest
+
 from appium import webdriver
 import pytest
 from time import sleep
+import torch
 
-from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import unittest
 
-from AppiumFrameWork1.pages.Alerting import slackalerts
+from appium import webdriver
+import pytest
+from time import sleep
 from AppiumFrameWork1.pages.LoginPage import LoginPage
-from AppiumFrameWork1.tests1.conftest import appium_driver
-from AppiumFrameWork1.pages.DriverClass import Driver
+
 import random
-from AppiumFrameWork1.tests1.conftest import appium_driver
-from AppiumFrameWork1.tests1.conftest import appium_driver
 
 name = ['Rahul', 'Arjun', 'Ravi', 'Hari', 'Nikhil', 'Sachin', 'Suresh', 'Manu', 'Rishi', 'Varun', 'Prithwi', 'Ajil']
 
 
+class AccountPage(unittest.TestCase):
 
+    def setUp(self):
+        self.driver = webdriver.Remote(command_executor="http://127.0.0.1:4723/wd/hub",
+                                       desired_capabilities=
+                                       {
+                                           "platformName": "Android",
+                                           "platformVersion": "9",
+                                           "deviceName": "92d5ac50",
+                                           "automationName": "uiautomator2",
+                                           "app": "C:/Users/clinton/Downloads/app-prod-debug.apk",
+                                           "newCommandTimeout": 600,
+                                           "launchTimeout": "90000",
+                                           "adbExecTimeout": "30000",
+                                           "autoGrantPermissions": "true"
+                                       })
 
-
-
-def test_edit_business_name(appium_driver):
-
-    try:
-        driver = appium_driver
+    def test_edit_business_name(self):
         business_name_text = random.choice(name)
-        cf = LoginPage(driver)
-        cf.logincall()
-        accounts_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
+        accounts_icon = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Account")')
         accounts_icon.click()
-        edit_details_text = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Edit business details")')))
+        sleep(1)
+        edit_details_text = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Edit business details")')
         edit_details_text.click()
-        business_name_textbox = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/store_name_et")))
+        sleep(1)
+        business_name_textbox = self.driver.find_element_by_id("com.dukaan.app:id/store_name_et")
         business_name_textbox.send_keys(business_name_text)
-        save_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/email_et")))
+        sleep(3)
+        save_button = self.driver.find_element_by_id("com.dukaan.app:id/email_et")
         save_button.click()
-        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store details updated")')))
-    except:
-        print("except")
-        slackalerts().slackalert(result="test_edit_business_name-failed")
-def test_update_store_logo(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
-        accounts_icon.click()
-        edit_business_details_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Varun")')))
-        edit_business_details_button.click()
-        update_logo_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/tvSelectImage")))
-        update_logo_button.click()
-        gallery_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Gallery")')))
-        gallery_icon.click()
-        folder_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, "	//android.widget.ImageView[@content-desc='Folder']")))
-        folder_select.click()
-        image_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/image_view")))
-        image_select.click()
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/email_et")))
-        save_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store details updated")')))
+        sleep(2)
+        self.assertEqual(self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Store details updated")').is_displayed(), True)
 
-def test_delete_store_logo(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
+    def test_update_store_logo(self):
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
+        accounts_icon = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Account")')
         accounts_icon.click()
-        edit_business_details_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Edit business details")')))
+        sleep(1)
+        edit_business_details_button = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Edit business details")')
         edit_business_details_button.click()
-        update_logo_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/tvSelectImage")))
+        sleep(2)
+        update_logo_button = self.driver.find_element_by_id("com.dukaan.app:id/tvSelectImage")
         update_logo_button.click()
-        gallery_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[2]')))
+        sleep(1)
+        gallery_icon = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Gallery")')
         gallery_icon.click()
-        folder_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(self.driver.find_element(AppiumBy.ID, "com.dukaan.app:id/image")))
+        sleep(1)
+        folder_select = self.driver.find_element_by_xpath("	//android.widget.ImageView[@content-desc='Folder']")
         folder_select.click()
-        image_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/image_view")))
+        sleep(4)
+        image_select = self.driver.find_element_by_id("com.dukaan.app:id/image_view")
         image_select.click()
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/action_btn")))
+        sleep(3)
+        save_button = self.driver.find_element_by_id("com.dukaan.app:id/email_et")
         save_button.click()
+        sleep(2)
+        assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Store details updated")')
+
+    def test_delete_store_logo(self):
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
+        accounts_icon = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Account")')
+        accounts_icon.click()
+        sleep(2)
+        edit_business_details_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Edit business details")')
         edit_business_details_button.click()
-        remove_image_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/remove_image_iv")))
+        sleep(2)
+        update_logo_button = self.driver.find_element_by_id("com.dukaan.app:id/tvSelectImage")
+        update_logo_button.click()
+        sleep(2)
+        gallery_icon = self.driver.find_element_by_xpath('(//android.widget.ImageView[@content-desc="Small Icon"])[2]')
+        gallery_icon.click()
+        sleep(3)
+        folder_select = self.driver.find_element_by_id("com.dukaan.app:id/image")
+        folder_select.click()
+        sleep(2)
+        image_select = self.driver.find_element_by_id("com.dukaan.app:id/image_view")
+        image_select.click()
+        sleep(6)
+        save_button = self.driver.find_element_by_id("com.dukaan.app:id/action_btn")
+        save_button.click()
+        sleep(4)
+        edit_business_details_button.click()
+        sleep(4)
+        remove_image_button = self.driver.find_element_by_id("com.dukaan.app:id/remove_image_iv")
         remove_image_button.click()
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/email_et")))
+        sleep(1)
+        save_button = self.driver.find_element_by_id("com.dukaan.app:id/action_btn")
         save_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Varun")')))
-
-def test_add_new_business_category(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
-        accounts_icon.click()
-        edit_business_details_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Edit business details")')))
+        sleep(5)
         edit_business_details_button.click()
-        business_category = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/store_category_et")))
+        sleep(4)
+        assert self.driver.find_element_by_id("com.dukaan.app:id/store_image_pick_rl")
+
+    def test_add_new_business_category(self):
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
+        accounts_icon = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Account")')
+        accounts_icon.click()
+        sleep(3)
+        edit_business_details_button = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Edit business details")')
+        edit_business_details_button.click()
+        sleep(1)
+        business_category = self.driver.find_element_by_id("com.dukaan.app:id/store_category_et")
         business_category.click()
+        sleep(1)
         self.driver.swipe(470, 760, 470, 66, 400)
-        sleep(3)
+        sleep(1)
         self.driver.swipe(470, 1750, 470, 100, 400)
-        sleep(3)
-        business_category_not_listed = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("My business category is not listed")')))
+        business_category_not_listed = self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("My business category is not listed")')
         business_category_not_listed.click()
-        business_category_textbox = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/category_name_et")))
+        sleep(1)
+        business_category_textbox = self.driver.find_element_by_id("com.dukaan.app:id/category_name_et")
         business_category_textbox.send_keys("Healthcare")
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/new_category_save_tv")))
+        sleep(1)
+        save_button = self.driver.find_element_by_id("com.dukaan.app:id/new_category_save_tv")
         save_button.click()
-        save_business_details_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/action_btn")))
+        sleep(2)
+        save_business_details_button = self.driver.find_element_by_id("com.dukaan.app:id/action_btn")
         save_business_details_button.click()
+        sleep(3)
         edit_business_details_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText").text("Healthcare")')))
+        sleep(3)
+        assert self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.EditText").text("Healthcare")')
 
-def test_logout(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
+    def test_logout(self):
+        self.driver.launch_app()
+        sleep(2)
+        get_started_button = self.driver.find_element_by_id("com.dukaan.app:id/get_started")
+        get_started_button.click()
+        sleep(1)
+        continue_with_email_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Continue with Email")')
+        continue_with_email_button.click()
+        sleep(1)
+        email_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_input")
+        email_address_textbox.send_keys("cojeret739@kuruapp.com")
+        sleep(1)
+        continue_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        continue_button.click()
+        sleep(2)
+        password_textbox = self.driver.find_element_by_id("com.dukaan.app:id/et_password")
+        password_textbox.send_keys("dukaanauto")
+        sleep(2)
+        enter_password_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_continue")
+        enter_password_button.click()
+        sleep(5)
+        accounts_icon = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Account")')
         accounts_icon.click()
-        sleep(3)
+        sleep(1)
         self.driver.swipe(542, 1666, 542, 1000, 400)
-        sleep(3)
-        additional_info = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Additional Information")')))
+        sleep(1)
+        additional_info = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Additional Information")')
         additional_info.click()
-        signout_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Sign Out")')))
+        sleep(1)
+        signout_button = self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().className("android.widget.TextView").text("Sign Out")')
         signout_button.click()
-        signout_confirm = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/tv_yes")))
+        sleep(1)
+        signout_confirm = self.driver.find_element_by_id("com.dukaan.app:id/tv_yes")
         signout_confirm.click()
         sleep(2)
-        assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/get_started")))
+        assert self.driver.find_element_by_id("com.dukaan.app:id/get_started")
 
-        # def test_edit_business_address(self):
-        #     self.driver.launch_app()
-        #     sleep(10)
-        #     accounts_icon = self.driver.find_element_by_id("com.dukaan.app:id/account_iv")
-        #     accounts_icon.click()
-        #     sleep(1)
-        #     edit_business_details_button = self.driver.find_element_by_android_uiautomator(
-        #         'new UiSelector().className("android.widget.TextView").text("Edit business details")')
-        #     edit_business_details_button.click()
-        #     sleep(3)
-        #     store_address = self.driver.find_element_by_id("com.dukaan.app:id/store_address_et")
-        #     store_address.click()
-        #     sleep(4)
-        #     change_address = self.driver.find_element_by_id("com.dukaan.app:id/change_address_tv")
-        #     change_address.click()
-        #     sleep(2)
-        #     search_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/address_et")
-        #     search_address_textbox.send_keys("dukaan kal")
-        #     sleep(5)
-        #     location = self.driver.find_element_by_id("com.dukaan.app:id/name_tv")
-        #     location.click()
-        #     sleep(1)
-        #     location.click()
-        #     sleep(4)
-        #     save_address_button = self.driver.find_element_by_id("com.dukaan.app:id/action_btn")
-        #     save_address_button.click()
-        #     sleep(4)
-        #     assert self.driver.find_element_by_android_uiautomator(
-        #         'new UiSelector().className("android.widget.EditText").text("131/1, Dukaan Kalwar Rd, Chandra Nagar, Gokulpura, Jaipur, Rajasthan 302012, India")')
+    # def test_edit_business_address(self):
+    #     self.driver.launch_app()
+    #     sleep(10)
+    #     accounts_icon = self.driver.find_element_by_id("com.dukaan.app:id/account_iv")
+    #     accounts_icon.click()
+    #     sleep(1)
+    #     edit_business_details_button = self.driver.find_element_by_android_uiautomator(
+    #         'new UiSelector().className("android.widget.TextView").text("Edit business details")')
+    #     edit_business_details_button.click()
+    #     sleep(3)
+    #     store_address = self.driver.find_element_by_id("com.dukaan.app:id/store_address_et")
+    #     store_address.click()
+    #     sleep(4)
+    #     change_address = self.driver.find_element_by_id("com.dukaan.app:id/change_address_tv")
+    #     change_address.click()
+    #     sleep(2)
+    #     search_address_textbox = self.driver.find_element_by_id("com.dukaan.app:id/address_et")
+    #     search_address_textbox.send_keys("dukaan kal")
+    #     sleep(5)
+    #     location = self.driver.find_element_by_id("com.dukaan.app:id/name_tv")
+    #     location.click()
+    #     sleep(1)
+    #     location.click()
+    #     sleep(4)
+    #     save_address_button = self.driver.find_element_by_id("com.dukaan.app:id/action_btn")
+    #     save_address_button.click()
+    #     sleep(4)
+    #     assert self.driver.find_element_by_android_uiautomator(
+    #         'new UiSelector().className("android.widget.EditText").text("131/1, Dukaan Kalwar Rd, Chandra Nagar, Gokulpura, Jaipur, Rajasthan 302012, India")')
 
+    def tearDown(self):
+        self.driver.quit()
+
+
+if '__main__' == __name__:
+    unittest.main()
