@@ -1,11 +1,4 @@
 import unittest
-
-from appium import webdriver
-import pytest
-from time import sleep
-import torch
-
-import unittest
 from appium import webdriver
 import pytest
 from time import sleep
@@ -14,34 +7,41 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from AppiumFrameWork1.pages.Alerting import slackalerts
 from AppiumFrameWork1.pages.LoginPage import LoginPage
 from AppiumFrameWork1.tests1.conftest import appium_driver
 from AppiumFrameWork1.pages.DriverClass import Driver
 import random
+from AppiumFrameWork1.tests1.conftest import appium_driver
+from AppiumFrameWork1.tests1.conftest import appium_driver
 
 name = ['Rahul', 'Arjun', 'Ravi', 'Hari', 'Nikhil', 'Sachin', 'Suresh', 'Manu', 'Rishi', 'Varun', 'Prithwi', 'Ajil']
 
 
 
-class AccountPage(unittest.TestCase):
 
 
 
-    def test_edit_business_name(self):
+def test_edit_business_name(appium_driver):
+
+    try:
+        driver = appium_driver
         business_name_text = random.choice(name)
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
+        cf = LoginPage(driver)
+        cf.logincall()
+        accounts_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
         accounts_icon.click()
-        edit_details_text = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Edit business details")')))
+        edit_details_text = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Edit business details")')))
         edit_details_text.click()
-        business_name_textbox = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/store_name_et")))
+        business_name_textbox = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/store_name_et")))
         business_name_textbox.send_keys(business_name_text)
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/email_et")))
+        save_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/email_et")))
         save_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store details updated")')))
-
-    def test_update_store_logo(self):
+        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store details updated")')))
+    except:
+        print("except")
+        slackalerts().slackalert(result="test_edit_business_name-failed")
+def test_update_store_logo(self):
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
         accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
@@ -60,7 +60,7 @@ class AccountPage(unittest.TestCase):
         save_button.click()
         assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store details updated")')))
 
-    def test_delete_store_logo(self):
+def test_delete_store_logo(self):
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
         accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
@@ -84,7 +84,7 @@ class AccountPage(unittest.TestCase):
         save_button.click()
         assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Varun")')))
 
-    def test_add_new_business_category(self):
+def test_add_new_business_category(self):
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
         accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
@@ -108,7 +108,7 @@ class AccountPage(unittest.TestCase):
         edit_business_details_button.click()
         assert WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText").text("Healthcare")')))
 
-    def test_logout(self):
+def test_logout(self):
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
         accounts_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Account")')))
@@ -155,8 +155,3 @@ class AccountPage(unittest.TestCase):
         #     assert self.driver.find_element_by_android_uiautomator(
         #         'new UiSelector().className("android.widget.EditText").text("131/1, Dukaan Kalwar Rd, Chandra Nagar, Gokulpura, Jaipur, Rajasthan 302012, India")')
 
-    def tearDown(self):
-        self.driver.quit()
-
-    if '__main__' == __name__:
-        unittest.main()

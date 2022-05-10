@@ -70,8 +70,7 @@ class LoginPage(unittest.TestCase):
         sleep(2)
         otp_textbox = self.driver.find_element_by_id("1d13d877-636d-4ec0-9663-7ce3512c4b87")
         # otp_textbox = self.driver.find_element_by_android_uiautomator(
-        #     'new UiSelector().className("android.widget.TextView").text(" ")')
-        otp_textbox.send_keys("723573")
+        #     'new UiSelector().className("android.widget.TextView").text(" ")')l
         sleep(5)
         assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Home")')
 

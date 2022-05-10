@@ -1,4 +1,5 @@
 import unittest
+from datetime import time
 
 from appium import webdriver
 import pytest
@@ -10,99 +11,97 @@ from selenium.webdriver.support import expected_conditions as EC
 
 logging.basicConfig(filename='dukaanandroidautomation.log', filemode='w')
 logger = logging.getLogger(__name__)
-from time import sleep
-import random
-from random import randint
 from AppiumFrameWork1.pages.LoginPage import LoginPage
-
+import time
 name = ['Rahul', 'Arjun', 'Ravi', 'Hari', 'Nikhil', 'Sachin', 'Suresh', 'Manu', 'Rishi', 'Varun', 'Prithwi', 'Ajil']
 
-@pytest.mark.usefixtures("beforeClass", "beforeMethod")
-class ManageStorePage(unittest.TestCase):
 
 
 
-    def test_marketing_designs_page(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
+def test_marketing_designs_page(appium_driver):
+        driver = appium_driver
+        cf = LoginPage(driver)
+        cf.logincall()
+        manage_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
         manage_icon.click()
-        marketing_designs_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[1]')))
+        marketing_designs_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[1]')))
         marketing_designs_icon.click()
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Business Card")')))
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store Banners")')))
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("WhatsApp Stories")')))
+        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Business Card")')))
+        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Store Banners")')))
+        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("WhatsApp Stories")')))
 
-    def test_whatsapp_stories(self):
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
+def test_whatsapp_stories(appium_driver):
+        driver = appium_driver
+        cf = LoginPage(driver)
+        cf.logincall()
+        manage_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
         manage_icon.click()
-        marketing_designs_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[1]')))
+        marketing_designs_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[1]')))
         marketing_designs_icon.click()
-        whatsapp_stories_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("WhatsApp Stories")')))
+        whatsapp_stories_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("WhatsApp Stories")')))
         whatsapp_stories_icon.click()
-        edit_text_button_whatsapp = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/edit_btn")))
+        edit_text_button_whatsapp = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/edit_btn")))
         edit_text_button_whatsapp.click()
-        footer_text = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/id_et_footer")))
+        footer_text = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/id_et_footer")))
         footer_text.send_keys("SHOP ONLINE FROM DUKAAN TEST FOOTER")
-        save_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/id_btn_save")))
+        save_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/id_btn_save")))
         save_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("SHOP ONLINE FROM DUKAAN TEST FOOTER")')))
+        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("SHOP ONLINE FROM DUKAAN TEST FOOTER")')))
 
-    def test_create_discount_coupon_as_percentage(self):
+def test_create_discount_coupon_as_percentage(appium_driver):
         # ensure there is already a coupon added
         coupon_code = ("PERCOUPON")
-        self.cf = LoginPage(self.driver)
-        self.cf.logincall()
-        manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
+        driver = appium_driver
+        cf = LoginPage(driver)
+        cf.logincall()
+        manage_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
         manage_icon.click()
-        discount_coupons_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[3]')))
+        discount_coupons_icon = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.XPATH, '(//android.widget.ImageView[@content-desc="Small Icon"])[3]')))
         discount_coupons_icon.click()
-        create_coupon_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/action_btn")))
+        create_coupon_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/action_btn")))
         create_coupon_button.click()
-        select_discount_type = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Percentage discount")')))
+        select_discount_type = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Percentage discount")')))
         select_discount_type.click()
-        coupon_code_textbox = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/coupon_code_et")))
+        coupon_code_textbox = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/coupon_code_et")))
         coupon_code_textbox.send_keys(coupon_code)
-        uses_per_cust_dropdown = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/user_per_cust_spinner")))
+        uses_per_cust_dropdown = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/user_per_cust_spinner")))
         uses_per_cust_dropdown.click()
-        custom_select = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Custom")')))
+        custom_select = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Custom")')))
         custom_select.click()
-        uses_per_cust_textbox = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/user_per_cust_cstom_et")))
+        uses_per_cust_textbox = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/user_per_cust_cstom_et")))
         uses_per_cust_textbox.send_keys("50")
-        percent_textbox = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/percent_discount_value_et")))
+        percent_textbox = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/percent_discount_value_et")))
         percent_textbox.send_keys("20")
-        min_order_amount = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/min_order_value_et")))
+        min_order_amount = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/min_order_value_et")))
         min_order_amount.send_keys("300")
-        max_discount_amount_textbox = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/maximum_discount_et")))
+        max_discount_amount_textbox = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/maximum_discount_et")))
         max_discount_amount_textbox.send_keys("100")
-        sleep(3)
-        self.driver.swipe(542, 1666, 542, 1000, 400)
-        sleep(3)
-        coupon_functionality = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Coupon functionality")')))
+        time.sleep(3)
+        driver.swipe(542, 1666, 542, 1000, 400)
+        time.sleep(3)
+        coupon_functionality = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Coupon functionality")')))
         coupon_functionality.click()
-        show_coupon_to_customer_toggle = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/switch_show_cust")))
+        show_coupon_to_customer_toggle = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/switch_show_cust")))
         show_coupon_to_customer_toggle.click()
-        valid_for_online_payments_toggle = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/switch_valid_online")))
+        valid_for_online_payments_toggle = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/switch_valid_online")))
         valid_for_online_payments_toggle.click()
-        coupon_validity = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Coupon validity")')))
+        coupon_validity = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Coupon validity")')))
         coupon_validity.click()
-        start_date = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/date_from")))
+        start_date = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/date_from")))
         start_date.click()
-        month_navigation = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "android:id/next")))
+        month_navigation = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "android:id/next")))
         month_navigation.click()
-        start_date_selection = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.view.View").text("1")')))
+        start_date_selection = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.view.View").text("1")')))
         start_date_selection.click()
-        select_time = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/time_from")))
+        select_time = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/time_from")))
         select_time.click()
-        done_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/timeDone")))
+        done_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/timeDone")))
         done_button.click()
-        create_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/createCouponButton")))
+        create_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/createCouponButton")))
         create_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("PERCOUPON")')))
+        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("PERCOUPON")')))
 
-    def test_delete_coupon(self):
+'''def test_delete_coupon(self):
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
         manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
@@ -143,9 +142,14 @@ class ManageStorePage(unittest.TestCase):
         delete_coupon.click()
         confirm_delete = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/consentActionTV")))
         confirm_delete.click()
-        https: // youtu.be / KJ5bFv - IRFM
+        try:
+            self.assertEqual(WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("DELCOUPON")').is_displayed(), True)))
 
-    def test_create_discount_coupon_as_flat_discount(self):
+        except Exception as e:
+            logger.error("Discount coupon not deleted" + str(e))
+            logger.info("Discount coupon deleted successfully" + str(e))
+
+def test_create_discount_coupon_as_flat_discount(self):
         # ensure there is already a coupon added
         coupon_code = ("FLATDISC1")
         self.cf = LoginPage(self.driver)
@@ -174,7 +178,7 @@ class ManageStorePage(unittest.TestCase):
         create_button.click()
         assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("FLATDISC1")')))
 
-    def test_create_discount_coupon_as_buy_x_get_y(self):
+def test_create_discount_coupon_as_buy_x_get_y(self):
         # ensure there is already a coupon added
         coupon_code = ("BUYXGETY")
         self.cf = LoginPage(self.driver)
@@ -203,9 +207,9 @@ class ManageStorePage(unittest.TestCase):
         all_products_select.click()
         create_button = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/createCouponButton")))
         create_button.click()
-        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("BUYXGETY")')))
+        assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("BUYXGETY")')))'''
 
-    def test_my_customers_valid_search(self):
+def test_my_customers_valid_search(self):
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
         manage_icon = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Manage")')))
@@ -218,7 +222,7 @@ class ManageStorePage(unittest.TestCase):
         search_textbox.send_keys("Jayaneeth")
         assert WebDriverWait(self.driver, 15).until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.TextView").text("Jayaneeth Ck")')))
 
-    def test_add_customer(self):
+'''def test_add_customer(self):
         customer_name = random.choice(name)
         self.cf = LoginPage(self.driver)
         self.cf.logincall()
@@ -235,7 +239,7 @@ class ManageStorePage(unittest.TestCase):
         name_textbox.send_keys(customer_name)
         customer_name_text = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((AppiumBy.ID, "com.dukaan.app:id/customer_name_et")))
 
-        def random_mobile_number(n):
+    def random_mobile_number(n):
             range_start = 10 ** (n - 1)
             range_end = (10 ** n) - 1
             return randint(range_start, range_end)
@@ -461,7 +465,7 @@ class ManageStorePage(unittest.TestCase):
     #         self.assertEqual(self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("charge to be deleted")').is_displayed(), True)
     #
     #     except Exception as e:
-    #         logger.error("Extra charge not deleted str(e))
+    #         logger.error("Extra charge not deleted" + str(e))
     #         logger.info("Extra charge deleted successfully" + str(e))
 
     # def test_change_default_payment_method(self):
@@ -786,10 +790,5 @@ class ManageStorePage(unittest.TestCase):
         update_button = self.driver.find_element_by_id("com.dukaan.app:id/btn_add_field")
         update_button.click()
         sleep(3)
-        assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Edited *")')
+        assert self.driver.find_element_by_android_uiautomator('new UiSelector().className("android.widget.TextView").text("Edited *")')'''
 
-    def tearDown(self):
-        self.driver.quit()
-
-    if '__main__' == __name__:
-        unittest.main()

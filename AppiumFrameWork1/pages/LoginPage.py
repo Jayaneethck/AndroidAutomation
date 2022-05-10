@@ -35,13 +35,13 @@ class LoginPage(BasePage):
         return
 
     def enterEmailAddress(self):
-        self.sendText("clintonvinoth77@gmail.com", self._enteremailadddress, "id")
+        self.sendText("menavaf153@azteen.com", self._enteremailadddress, "id")
 
     def clickEmailContinueButton(self):
         self.clickElement(self._continueemailbutton, "id")
 
     def enterPassword(self):
-        self.sendText("Clinton@97", self._enterpassword, "id")
+        self.sendText("menavaf153@azteen.com", self._enterpassword, "id")
 
     # def enterPassword2(self):
     # self.sendText("Clinton@971", self._enterpassword, "id")
@@ -66,3 +66,4 @@ class LoginPage(BasePage):
         self.enterPassword()
         self.clickPasswordContinueButton()
         self.verifyHomePage()
+

@@ -17,12 +17,12 @@ delivery_fee = ['40', '30', '50', '60', '70', '80', '90', '100']
 class OrdersPage(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Remote(command_executor="http://127.0.0.1:4723/wd/hub",
+        self.driver = webdriver.Remote(command_executor="http://127.0.0.1:4725/wd/hub",
                                        desired_capabilities=
                                        {
                                            "platformName": "Android",
-                                           "platformVersion": "9",
-                                           "deviceName": "emulator-5554",
+                                           "platformVersion": "11",
+                                           "deviceName": "138276037200179",
                                            "automationName": "uiautomator2",
                                            "app": "C:/Users/clinton/Downloads/app-prod-debug.apk",
                                            "newCommandTimeout": 600,
